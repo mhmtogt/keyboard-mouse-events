@@ -4,22 +4,30 @@ import React, { useState } from 'react'
  import { Container } from 'react-bootstrap';
 
 const Forms0bject = () => {
-    const [userName, setUserName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+   
+   // bu object şekli çok fazla state olduğunda kullanımı yazımı zor olur bunun jiçin object kullanmak çok daha efectif olur
+    const [data, setData] = useState({
+      userName:"",
+      email:"",
+      password:"",
+    })
+    
 
-    const handleUserName =(e)=>{
-      setUserName(e.target.value)
+   
+
+    const {userName, password, email} = data
+
+
+    const handleData =(e)=>{
+     // console.log(e.target.id)
+      setData({...data, [e.target.id]: e.target.value})// {key=(e.targer.id) id istediğim değer olarak verdiğim için burada kullanabilirz     value =(e.target.value)  } bu bir obje olduğu için süslü ile yapıp state kapağını açıp kısmi güncelleme yapbiliiz
     }
 
-    const handleEmail=(e)=>{
-      setEmail(e.target.value)
-    }
-
+    //destructure
     const handleFormSubmit= (e)=>{
    //  console.log(e.target.value)
 
-      e.preventDefault() // bunu yaptınca içerik refresh edilmiyor içerik silinmiyor içeriği kaydetmiş oluyoruz
+     // e.preventDefault() // bunu yaptınca içerik refresh edilmiyor içerik silinmiyor içeriği kaydetmiş oluyoruz
       alert(
         `
         userName:${userName},
@@ -28,10 +36,10 @@ const Forms0bject = () => {
             )
             //ileride bir submit işlemi sonucunda verilerin nasıl post edilbileceğini göstermek adına eklenmiştir
         
-        // bu altaki setler veriyi alert ile gösterdikten sonra form içini sıfırlamak için kullanılır
-        setEmail("")
-        setPassword("")
-        setUserName("")
+    setData({ 
+          userName:"",
+          email:"",
+          password:""})
             //? const res = axios.post("url",{metod:post userName,password,email})
      }
 
@@ -42,20 +50,20 @@ const Forms0bject = () => {
         <h1 className='text-danger'>FORMS</h1>
        <Form.Group className="mb-3" controlId="userName">
         <Form.Label> {userName && <span className='fw-bold'>Hello:{userName}</span>}</Form.Label>
-        <Form.Control type="user" placeholder="Enter User Name" onChange={handleUserName} value={userName} />
+        <Form.Control type="user" placeholder="Enter User Name" onChange={handleData} value={userName} id="userName" />
         </Form.Group>
 
 
       <Form.Group className="mb-3" controlId="Email">
         <Form.Label>{email && <span className='fw-bold'>Email:{email}</span>}</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" onChange={handleEmail} value={email}/>   
+        <Form.Control type="email" placeholder="Enter email" onChange={handleData} value={email} id="email"/>   
       </Form.Group>
 
 
 
       <Form.Group className="mb-3" controlId="Password">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}} value={password}/>
+        <Form.Control type="password" placeholder="Password" onChange={handleData} value={password} id="password"/>
       </Form.Group>
      
       <Button variant="danger" type="submit">
