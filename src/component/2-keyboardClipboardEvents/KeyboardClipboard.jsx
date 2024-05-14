@@ -20,6 +20,11 @@ const KeyboardClipboard = () => {
       alert("kesmek yasak")
       e.preventDefault()// kesimeyi engellemek için kullandım 
     }
+
+    const handlePast=(e)=>{
+      e.target.style.fontFamily= "Curire New"
+      e.target.style.fontSize= "1.2rem"
+    }
   
   
   return (
@@ -42,7 +47,7 @@ const KeyboardClipboard = () => {
       </div>
 
       <div>
-        <textarea className="form-control" name="textarea" id="area" cols="30" rows="10"></textarea>
+        <textarea onPaste={handlePast} className="form-control" name="textarea" id="area" cols="30" rows="10"></textarea>
       </div>
     </div>
   )
