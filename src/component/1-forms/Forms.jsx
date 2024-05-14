@@ -17,10 +17,22 @@ const Forms = () => {
     }
 
     const handleFormSubmit= (e)=>{
-     console.log(e.target.value)
+   //  console.log(e.target.value)
 
       e.preventDefault() // bunu yaptınca içerik refresh edilmiyor içerik silinmiyor içeriği kaydetmiş oluyoruz
-      alert("")
+      alert(
+        `
+        userName:${userName},
+        email:${email},
+        password:${password}`
+            )
+            //ileride bir submit işlemi sonucunda verilerin nasıl post edilbileceğini göstermek adına eklenmiştir
+        
+        // bu altaki setler veriyi alert ile gösterdikten sonra form içini sıfırlamak için kullanılır
+        setEmail("")
+        setPassword("")
+        setUserName("")
+            //? const res = axios.post("url",{metod:post userName,password,email})
      }
 
 
